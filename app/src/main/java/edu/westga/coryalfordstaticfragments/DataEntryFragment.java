@@ -58,6 +58,6 @@ public class DataEntryFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        DataEntryListener listener = (DataEntryListener) context;
+        this.listener = (DataEntryListener) context;
     }
 }
