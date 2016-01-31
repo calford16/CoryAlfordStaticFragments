@@ -21,6 +21,11 @@ public class DataDisplayFragment extends Fragment {
     double number1;
     double number2;
     double productDouble;
+    DataAddListener listener;
+
+    public interface DataAddListener {
+        void onDataAdd(double number1, double number2);
+    }
 
     public void setNumber1(double number1) {
         this.number1 = number1;
@@ -40,6 +45,13 @@ public class DataDisplayFragment extends Fragment {
         // Inflate the layout for this fragment
         View theView = inflater.inflate(R.layout.fragment_data_display, container, false);
 
+        Button addButton = (Button) theView.findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                addButtonClicked(v);
+            }
+        });
+
         this.product = (TextView) theView.findViewById(R.id.textView);
 
         return theView;
@@ -51,5 +63,15 @@ public class DataDisplayFragment extends Fragment {
 
     public void displayProduct() {
         this.product.setText(Double.toString(productDouble));
+    }
+
+    private void addButtonClicked(View v) {
+        listener.onDataAdd(number1, number2);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.listener = (DataAddListener) context;
     }
 }

@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener {
+public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener, DataDisplayFragment.DataAddListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,5 +58,15 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
         displayFragment.setNumber2(numberTwo);
         displayFragment.multiply();
         displayFragment.displayProduct();
+
+    }
+
+    @Override
+    public void onDataAdd(double numberOne, double numberTwo) {
+        DataDisplayFragmentTwo displayFragmentTwo = (DataDisplayFragmentTwo) getSupportFragmentManager().findFragmentById(R.id.dataDisplayFragmentTwo);
+        displayFragmentTwo.setNumber1(numberOne);
+        displayFragmentTwo.setNumber2(numberTwo);
+        displayFragmentTwo.add();
+        displayFragmentTwo.displaySum();
     }
 }
